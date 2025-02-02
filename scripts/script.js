@@ -2,7 +2,7 @@ $(document).ready(function(){
     const phrases = ['pleasee🥺', 'I beg you', ':c', ':\'(', 'pleaseee Moaa🥺', 'I know you want it..',
         'pretty pleasee🥺', 'babe pleaseee🥺'
     ];
-    let multiplier = 1;
+    let multiplier = 2;
     let font_size = 16;
     $('#no-btn').click(function() {
         if (font_size >= 200) {
