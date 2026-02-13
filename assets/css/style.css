@@ -1,163 +1,83 @@
-/* 3D Gift Box Animations not easily doable with Tailwind */
+/* 3D Animations & Custom Utility */
 
-.gift-container {
-    perspective: 1000px;
-    width: 200px;
-    height: 200px;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.5s ease;
-}
-
-.gift-container:hover {
-    transform: scale(1.05);
-}
-
-.gift-container:hover .gift {
-    animation: shake 1s ease-in-out infinite;
-}
-
-.gift {
-    width: 150px;
-    height: 150px;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    transform-style: preserve-3d;
-}
-
-.gift-box {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #ffffff, #e0e0e0);
-    position: relative;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
-}
-
-.gift-lid {
-    width: 110%;
-    height: 40px;
-    background: linear-gradient(135deg, #ffffff, #f0f0f0);
-    position: absolute;
-    top: -40px;
-    /* Moves lid up initially to sit on top */
-    left: -5%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
-    z-index: 2;
-    transition: all 0.5s ease-out;
-}
-
-/* Ribbons */
-.ribbon-vertical {
-    position: absolute;
-    width: 30px;
-    height: 100%;
-    background: #6A1B9A;
-    /* Primary Purple */
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.ribbon-horizontal {
-    position: absolute;
-    height: 30px;
-    width: 100%;
-    background: #6A1B9A;
-    top: 50%;
-    transform: translateY(-50%);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.gift-lid .ribbon-vertical {
-    height: 100%;
-    background: #9C4DCC;
-}
-
-.gift-lid .ribbon-horizontal {
-    width: 100%;
-    background: #9C4DCC;
-}
-
-.gift-shadow {
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 140px;
-    height: 20px;
-    background: rgba(0, 0, 0, 0.2);
+/* Custom Cursor - Prettier & Fluid */
+.cursor-dot,
+.cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
     border-radius: 50%;
-    filter: blur(5px);
-}
-
-/* Open State */
-.gift-container.open .gift-lid {
-    transform: translateY(-100px) rotate(-20deg) translateX(50px);
-    opacity: 0;
-}
-
-.gift-container.open .gift-content {
-    opacity: 1;
-    transform: translate(-50%, -150px) scale(1);
-}
-
-.gift-container.open .gift {
-    animation: none;
-    /* Stop shaking */
-}
-
-/* Hidden Content Positioning */
-.gift-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    text-align: center;
-    width: 300px;
+    z-index: 9999;
     pointer-events: none;
-    transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* Animations */
-@keyframes shake {
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #D8B4FE;
+    /* Lavender */
+    box-shadow: 0 0 10px #D8B4FE, 0 0 20px #D8B4FE;
+    /* Soft Glow */
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(216, 180, 254, 0.5);
+    /* Soft Purple */
+    background: rgba(216, 180, 254, 0.05);
+    /* Faint fill */
+    transition: width 0.3s ease-out, height 0.3s ease-out, background-color 0.3s;
+    backdrop-filter: blur(1px);
+    /* Subtle blur behind */
+}
+
+body:hover .cursor-dot,
+body:hover .cursor-outline {
+    opacity: 1;
+}
+
+/* Hover State */
+body.hovering .cursor-outline {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(216, 180, 254, 0.15);
+    border-color: rgba(216, 180, 254, 0.8);
+    box-shadow: 0 0 30px rgba(216, 180, 254, 0.3);
+}
+
+@media (min-width: 768px) {
+    body {
+        cursor: none;
+    }
+}
+
+/* Hero Scroll Indicator */
+.animate-bounce {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
 
     0%,
+    20%,
+    50%,
+    80%,
     100% {
-        transform: translateX(-50%) rotate(0);
+        transform: translateY(0);
     }
 
-    25% {
-        transform: translateX(-50%) rotate(-5deg);
+    40% {
+        transform: translateY(-10px);
     }
 
-    75% {
-        transform: translateX(-50%) rotate(5deg);
-    }
-}
-
-@keyframes pulse-heart {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.2);
-    }
-
-    100% {
-        transform: scale(1);
+    60% {
+        transform: translateY(-5px);
     }
 }
 
-.floating-heart i {
-    animation: pulse-heart 1.5s infinite;
-}
-
-/* Scroll classes for JS */
+/* Scroll Reveal */
 .scroll-reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -167,4 +87,127 @@
 .scroll-reveal.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* --- Magical Elements --- */
+
+/* Floaty Animation */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Shimmer Button - Softer Interaction */
+.btn-magical {
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 15px rgba(106, 27, 154, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.1);
+    /* No sharp transition on transform, handled by JS lerp or soft CSS */
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    overflow: hidden;
+    position: relative;
+    display: inline-flex;
+}
+
+.btn-magical::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: 0.5s;
+}
+
+.btn-magical:hover {
+    box-shadow: 0 0 30px rgba(216, 180, 254, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-magical:hover::before {
+    left: 100%;
+}
+
+/* Glass Message Box */
+.glass-message {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: all 0.5s ease-out;
+}
+
+.glass-message.visible {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+    pointer-events: auto !important;
+}
+
+/* Star Glow Text */
+.text-glow {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(168, 85, 247, 0.5);
+}
+
+/* Spotlight Effect for Cards */
+.spotlight-card {
+    position: relative;
+    background: white;
+    /* Fallback */
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Soft ease for lift */
+}
+
+/* The gradient overlay */
+.spotlight-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(216, 180, 254, 0.15), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.spotlight-card:hover {
+    transform: translateY(-5px);
+    /* Gentle lift only */
+}
+
+.spotlight-card:hover::after {
+    opacity: 1;
+}
+
+/* 3D Utilities (Kept for Finale) */
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.transform-style-3d {
+    transform-style: preserve-3d;
+}
+
+.translate-z-10 {
+    transform: translateZ(20px);
+}
+
+.translate-z-20 {
+    transform: translateZ(40px);
 }
