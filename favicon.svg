@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <path d="M50 88.9L16.7 55.6C7.1 46 7.1 30.4 16.7 20.8 26.3 11.2 41.9 11.2 51.5 20.8L50 22.3 48.5 20.8C58.1 11.2 73.7 11.2 83.3 20.8 92.9 30.4 92.9 46 83.3 55.6L50 88.9" fill="#D8B4FE"/>
+  <circle cx="20" cy="20" r="5" fill="white">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="80" cy="30" r="3" fill="white">
+    <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" />
+  </circle>
+</svg>
