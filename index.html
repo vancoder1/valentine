@@ -1,37 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A simple Valentine's Day website">
-    <title>Valentine</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>For My Beautiful Lizzy</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lato:wght@300;400;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6A1B9A',
+                        primaryLight: '#9C4DCC',
+                        secondary: '#F5F5F5',
+                        darkText: '#333333',
+                    },
+                    fontFamily: {
+                        heading: ['Dancing Script', 'cursive'],
+                        subheading: ['Playfair Display', 'serif'],
+                        body: ['Lato', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom CSS for specific 3D animations -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <header>
-        <nav>
-            <h1>Valentine</h1>
-        </nav>
+
+<body class="bg-secondary text-darkText font-body overflow-x-hidden">
+
+    <!-- Hero Section with Parallax -->
+    <header id="hero"
+        class="relative h-screen flex items-center justify-center bg-fixed bg-center bg-cover overflow-hidden"
+        style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+        <!-- Overlay for extra style -->
+        <div class="absolute inset-0 bg-black/50 backdrop-grayscale"></div>
+
+        <div class="relative z-10 text-center p-10 rounded-3xl backdrop-blur-md bg-white/10 border border-white/20 shadow-2xl mx-4 max-w-2xl transform transition-transform duration-1000 translate-y-10 opacity-0"
+            id="hero-content">
+            <h1 class="text-5xl md:text-7xl font-heading text-white mb-4 drop-shadow-lg">To My Beautiful Lizzy</h1>
+            <p class="text-xl md:text-2xl font-subheading text-gray-200 mb-8">My Valentine, My Everything</p>
+            <div class="animate-bounce text-white text-3xl">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
     </header>
 
-    <main>
-        <section class="hero">
-            <h2>Happy Valentine's Day</h2>
-            <p>Celebrate love and friendship</p>
-        </section>
-
-        <section class="content">
-            <div class="card">
-                <h3>About</h3>
-                <p>Welcome to our Valentine's Day website. A place to celebrate love, friendship, and all the special relationships in your life.</p>
+    <!-- Time Together Counter -->
+    <section id="counter" class="py-20 bg-gradient-to-b from-secondary to-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-heading text-primary mb-12 scroll-reveal">Time Since We Started Dating
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto scroll-reveal delay-200">
+                <!-- Years -->
+                <div
+                    class="p-6 bg-white rounded-xl shadow-lg border-b-4 border-primary transform hover:-translate-y-2 transition-transform duration-300">
+                    <div id="years" class="text-4xl md:text-5xl font-bold text-gray-800">0</div>
+                    <div class="text-sm uppercase tracking-wide text-gray-500 mt-2">Years</div>
+                </div>
+                <!-- Days -->
+                <div
+                    class="p-6 bg-white rounded-xl shadow-lg border-b-4 border-primaryLight transform hover:-translate-y-2 transition-transform duration-300">
+                    <div id="days" class="text-4xl md:text-5xl font-bold text-gray-800">0</div>
+                    <div class="text-sm uppercase tracking-wide text-gray-500 mt-2">Days</div>
+                </div>
+                <!-- Hours -->
+                <div
+                    class="p-6 bg-white rounded-xl shadow-lg border-b-4 border-primary transform hover:-translate-y-2 transition-transform duration-300">
+                    <div id="hours" class="text-4xl md:text-5xl font-bold text-gray-800">0</div>
+                    <div class="text-sm uppercase tracking-wide text-gray-500 mt-2">Hours</div>
+                </div>
+                <!-- Minutes -->
+                <div
+                    class="p-6 bg-white rounded-xl shadow-lg border-b-4 border-primaryLight transform hover:-translate-y-2 transition-transform duration-300">
+                    <div id="minutes" class="text-4xl md:text-5xl font-bold text-gray-800">0</div>
+                    <div class="text-sm uppercase tracking-wide text-gray-500 mt-2">Minutes</div>
+                </div>
+                <!-- Seconds -->
+                <div
+                    class="p-6 bg-white rounded-xl shadow-lg border-b-4 border-primary transform hover:-translate-y-2 transition-transform duration-300 col-span-2 md:col-span-1">
+                    <div id="seconds" class="text-4xl md:text-5xl font-bold text-gray-800">0</div>
+                    <div class="text-sm uppercase tracking-wide text-gray-500 mt-2">Seconds</div>
+                </div>
             </div>
-        </section>
-    </main>
+            <p class="mt-8 text-lg text-gray-600 italic scroll-reveal delay-300">...and counting every beautiful second.
+            </p>
+        </div>
+    </section>
 
-    <footer>
-        <p>&copy; 2026 Valentine. All rights reserved.</p>
+    <!-- Our Journey Timeline -->
+    <section id="timeline" class="py-20 bg-white relative overflow-hidden">
+        <div
+            class="absolute inset-0 opacity-5 bg-[radial-gradient(#6A1B9A_1px,transparent_1px)] [background-size:16px_16px]">
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <h2 class="text-4xl md:text-5xl font-heading text-center text-primary mb-16 scroll-reveal">Our Journey</h2>
+
+            <div class="relative max-w-3xl mx-auto pl-8 md:pl-0">
+                <!-- Vertical Line: Left on mobile, Center on desktop -->
+                <div
+                    class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-gradient-to-b from-primaryLight to-primary rounded-full">
+                </div>
+
+                <!-- Timeline Item 1 -->
+                <div class="relative mb-16 scroll-reveal">
+                    <div class="flex flex-col md:flex-row items-center w-full">
+                        <div class="w-full md:w-1/2 pl-8 md:pl-0 md:pr-12 md:text-right mt-2 md:mt-0">
+                            <h3 class="text-2xl font-subheading font-bold text-gray-800">The Beginning</h3>
+                            <div class="text-primary font-bold mb-2">August 10, 2025</div>
+                            <p class="text-gray-600 bg-gray-50 p-4 rounded-lg shadow-sm inline-block mx-auto md:mx-0">
+                                The day my world changed forever.
+                            </p>
+                        </div>
+                        <!-- Dot: Left on mobile, Center on desktop -->
+                        <div
+                            class="absolute left-0.5 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <i class="fas fa-heart text-white text-xs"></i>
+                        </div>
+                        <div class="hidden md:block w-1/2 pl-12"></div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="relative mb-16 scroll-reveal">
+                    <div class="flex flex-col md:flex-row items-center w-full">
+                        <div class="hidden md:block w-1/2 pr-12"></div>
+                        <!-- Dot -->
+                        <div
+                            class="absolute left-0.5 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-purple-400 rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <i class="fas fa-plane text-white text-xs"></i>
+                        </div>
+                        <div class="w-full md:w-1/2 pl-8 md:pl-12 mt-2 md:mt-0">
+                            <h3 class="text-2xl font-subheading font-bold text-gray-800">Every Day Since</h3>
+                            <div class="text-primary font-bold mb-2">Every Single Day</div>
+                            <p class="text-gray-600 bg-gray-50 p-4 rounded-lg shadow-sm inline-block mx-auto md:mx-0">
+                                Building memories, sharing laughs, and loving you more with each sunrise.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="relative scroll-reveal">
+                    <div class="flex flex-col md:flex-row items-center w-full">
+                        <div class="w-full md:w-1/2 pl-8 md:pl-0 md:pr-12 md:text-right mt-2 md:mt-0">
+                            <h3 class="text-2xl font-subheading font-bold text-gray-800">Forever & Always</h3>
+                            <div class="text-primary font-bold mb-2">The Future</div>
+                            <p class="text-gray-600 bg-gray-50 p-4 rounded-lg shadow-sm inline-block mx-auto md:mx-0">
+                                Can't wait for all the adventures waiting for us.
+                            </p>
+                        </div>
+                        <!-- Dot -->
+                        <div
+                            class="absolute left-0.5 md:left-1/2 transform -translate-x-1/2 w-8 h-8 bg-primary rounded-full border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                            <i class="fas fa-infinity text-white text-xs"></i>
+                        </div>
+                        <div class="hidden md:block w-1/2 pl-12"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gift Box Surprise Section -->
+    <section id="surprise"
+        class="py-32 bg-primary relative flex flex-col items-center justify-center overflow-hidden min-h-[60vh]">
+        <div class="text-center z-10 mb-12">
+            <h2 class="text-4xl md:text-5xl font-heading text-white mb-4">A Special Gift For You</h2>
+            <p class="text-white/80 text-xl">Tap the box to open</p>
+        </div>
+
+        <!-- 3D Gift Box -->
+        <div class="gift-container group" id="gift-box">
+            <div class="gift">
+                <div class="gift-lid">
+                    <div class="ribbon-vertical"></div>
+                    <div class="ribbon-horizontal"></div>
+                </div>
+                <div class="gift-box">
+                    <div class="ribbon-vertical"></div>
+                    <div class="ribbon-horizontal"></div>
+                </div>
+                <div class="gift-shadow"></div>
+            </div>
+            <!-- Hidden Content inside the box -->
+            <div class="gift-content opacity-0 transition-opacity duration-300 pointer-events-none">
+                <div class="floating-heart text-6xl text-red-500 filter drop-shadow-lg">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div
+                    class="message text-2xl font-heading font-bold text-white mt-4 bg-black/40 backdrop-blur-md p-4 rounded-lg shadow-2xl">
+                    You are my greatest gift,<br>Lizzy!
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="bg-gray-900 text-gray-400 text-center py-8">
+        <p>Made with <i class="fas fa-heart text-red-500 animate-pulse"></i> for Elizabeth</p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Canvas for Confetti -->
+    <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+    <!-- Custom JS -->
+    <script src="assets/js/script.js"></script>
 </body>
+
 </html>
